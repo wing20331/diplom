@@ -10,12 +10,12 @@
 </head>
 <body class="container-fluid">
 <div th:insert="~{blocks/header}"></div>
-<h1 class="container mt-5">Добавление проекта</h1>
-<div th:each=" el : ${post}">
+<h1 class="container mt-5">Редактирование проекта</h1>
+<div th:each=" el : ${project}">
     <form method="post">
         <input type="text" th:value="${el.title}" name="title" placeholder="Введите название проекта" class="form-control mt-3">
-        <input type="text" th:value="${el.anons}" name="direction " placeholder="направление" class="form-control mt-3">
-        <textarea name="full_text"  placeholder="описание проекта" class="form-control mt-3" th:text="${el.fullText}"/>
+        <input type="text" th:value="${el.direction}" name="direction" placeholder="направление" class="form-control mt-3">
+        <textarea name="description"  placeholder="описание проекта" class="form-control mt-3" th:text="${el.description}"/>
     <button type="submit" class="btn btn-success mt-3">Обновить</button>
     </form>
 </div>

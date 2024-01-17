@@ -10,14 +10,14 @@
 </head>
 <body class="container-fluid">
 <div th:insert="~{blocks/header}"></div>
-<h3 class="container mt-5">Блог</h3>
+<h3 class="container mt-5">Проект</h3>
 
-<div th:each="el : ${post}" class="alert alert-info mt-3">
+<div th:each="el : ${project}" class="alert alert-info mt-3">
     <h3 th:text="${el.title}"></h3>
-    <p th:text="${el.fullText}"></p>
-    <p><b>Просмотры:</b> <span th:text="${el.views}"/> </p>
-    <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning"  >Редактировать</a>
-    <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+    <p th:text="${el.description}"></p>
+    <p><b>Направление:</b> <span th:text="${el.direction}"/> </p>
+    <a th:href="'/project/' + ${el.id} + '/edit'" class="btn btn-warning"  >Редактировать</a>
+    <form th:action="'/project/' + ${el.id} + '/remove'" method="post">
         <button type="submit" class="btn btn-warning">удалить</button>
     </form>
 </div>

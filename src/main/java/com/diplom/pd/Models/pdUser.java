@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Set;
 
 @Entity
 @Setter
 @Getter
 @Table
 @NoArgsConstructor
-public class User {
+public class pdUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,7 +19,7 @@ public class User {
     private String login;
     private String password;
 
-    public User(Long id, String userName, String name, String login, String password) {
+    public pdUser(Long id, String userName, String name, String login, String password) {
         this.id = id;
         this.userName = userName;
         this.name = name;
