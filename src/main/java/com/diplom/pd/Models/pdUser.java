@@ -1,6 +1,7 @@
 package com.diplom.pd.Models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,27 +11,27 @@ import lombok.Setter;
 @Getter
 @Table
 @NoArgsConstructor
+@Builder
 public class pdUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
+    private String FirstName;
+    private String LastName;
+    private String mail;
+    private String JobTitle;
     private String name;
-    private String login;
     private String password;
+    private String roles;
 
-    public pdUser(Long id, String userName, String name, String login, String password) {
+    public pdUser(Long id, String firstName, String lastName, String mail, String jobTitle, String username, String password, String roles) {
         this.id = id;
-        this.userName = userName;
-        this.name = name;
-        this.login = login;
+        FirstName = firstName;
+        LastName = lastName;
+        this.mail = mail;
+        JobTitle = jobTitle;
+        this.name = username;
         this.password = password;
+        this.roles = roles;
     }
-
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
-//    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles;
-
-
 }
