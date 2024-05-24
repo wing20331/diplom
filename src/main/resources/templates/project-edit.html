@@ -8,15 +8,17 @@
     <meta charset="UTF-8">
     <title>Редактирование проекта</title>
 </head>
-<body class="container-fluid">
+<body class="container-fluid" sec:authorize="hasRole('ROLE_ADMIN')">
 <div th:insert="~{blocks/header}"></div>
 <h1 class="container mt-5">Редактирование проекта</h1>
 <div th:each=" el : ${project}">
     <form method="post">
         <input type="text" th:value="${el.title}" name="title" placeholder="Введите название проекта" class="form-control mt-3">
         <input type="text" th:value="${el.direction}" name="direction" placeholder="направление" class="form-control mt-3">
+        <input type="text" th:value="${el.customer}" name="customer" placeholder="Заказчик" class="form-control mt-3">
+        <input type="text" th:value="${el.mailCustomer}" name="mailcustomer" placeholder="Почтовый адрес" class="form-control mt-3">
         <textarea name="description"  placeholder="описание проекта" class="form-control mt-3" th:text="${el.description}"/>
-    <button type="submit" class="btn btn-success mt-3">Обновить</button>
+    <button type="submit" class="btn btn-primary mt-3">Обновить</button>
     </form>
 </div>
 <div th:insert="~{blocks/footer}"></div>

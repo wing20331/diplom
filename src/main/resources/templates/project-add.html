@@ -12,11 +12,13 @@
 <div th:insert="~{blocks/header}"></div>
 <h1 class="container mt-5">Добавление проекта</h1>
 
-<form action="/project/add" method="post">
-    <input type="text" name="title" placeholder="Введите название статьи" class="form-control mt-3">
-    <input type="text" name="direction" placeholder="направление" class="form-control mt-3">
+<form action="/project/add" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+    <input type="text" name="title" placeholder="Введите название проекта" class="form-control mt-3">
+    <input type="text" name="direction" placeholder="направление" class="form-control mt-3 ">
+    <input type="text" name="customer" placeholder="Заказчик" class="form-control mt-3 ">
+    <input type="text" name="mailcustomer" placeholder="Почтовый адрес" class="form-control mt-3 ">
     <textarea name="description" placeholder="описание проекта" class="form-control mt-3"></textarea>
-    <button type="submit" class="btn btn-success mt-3">Добавить проект</button>
+    <button type="submit" class="btn btn-primary mt-3">Добавить проект</button>
 </form>
 
 <div th:insert="~{blocks/footer}"></div>

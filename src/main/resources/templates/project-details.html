@@ -16,10 +16,24 @@
     <h3 th:text="${el.title}"></h3>
     <p th:text="${el.description}"></p>
     <p><b>Направление:</b> <span th:text="${el.direction}"/> </p>
-    <a th:href="'/project/' + ${el.id} + '/edit'" class="btn btn-warning"  >Редактировать</a>
-    <form th:action="'/project/' + ${el.id} + '/remove'" method="post">
-        <button type="submit" class="btn btn-warning">удалить</button>
+    <p><b>Заказчик:</b> <span th:text="${el.customer}"/> </p>
+    <p sec:authorize="hasRole('ROLE_ADMIN')"><b>Почтовый адрес:</b> <span th:text="${el.mailCustomer}"/> </p>
+
+    <a th:href="'/project/' + ${el.id} + '/edit'" class="btn btn-primary mb-3" sec:authorize="hasRole('ROLE_ADMIN')" >Редактировать</a>
+    <form th:action="'/project/' + ${el.id} + '/remove'" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+        <button type="submit" class="btn btn-primary mb-3"  sec:authorize="hasRole('ROLE_ADMIN')">удалить</button>
     </form>
+
+    <form th:action="'/project/' + ${el.id} + '/submit'" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+        <button type="submit" class="btn btn-success mb-3"  sec:authorize="hasRole('ROLE_ADMIN')">Утвердить</button>
+    </form>
+
+    <a th:href="'/lk'" class="btn btn-primary mb-3" sec:authorize="hasRole('ROLE_STUDENT')" >Записаться</a>
+
+<!--    <form th:action="'/project/' + ${el.id} + '/take'" method="post" sec:authorize="hasRole('ROLE_STUDENT')">-->
+<!--        <button type="submit" class="btn btn-success mb-3"  sec:authorize="hasRole('ROLE_STUDENT')">Записаться на проект</button>-->
+<!--    </form>-->
+
 </div>
 
 <div th:insert="~{blocks/footer}"></div>

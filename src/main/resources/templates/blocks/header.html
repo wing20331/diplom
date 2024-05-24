@@ -4,10 +4,23 @@
         <span class="fs-4">Проектная деятельность</span>
     </a>
 
+    <script type="text/javascript">
+        function confirmLogout(event) {
+            event.preventDefault();
+            var result = confirm("Вы уверены, что хотите выйти?");
+            if (result) {
+                document.getElementById("logoutForm").submit();
+            }
+        }
+    </script>
+
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="/index" class="nav-link active" aria-current="page">Главная</a></li>
         <li class="nav-item"><a href="/project" class="nav-link">Проекты</a></li>
-        <li class="nav-item"><a href="/project/add" class="nav-link">Добавить Проект</a></li>
+        <li class="nav-item" sec:authorize="isAuthenticated"><a href="/lk" class="nav-link">Личный кабинет</a></li>
+        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a href="/project/add" class="nav-link">Добавить проект</a></li>
+        <li class="nav-item" sec:authorize="isAnonymous"><a href="/login" class="nav-link active">Войти</a></li>
+        <li class="nav-item" sec:authorize="isAuthenticated">  <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form> <button type="submit" class="btn btn-primary" onclick="confirmLogout(event)">Выйти</button></li>
     </ul>
 </header>
 </div>

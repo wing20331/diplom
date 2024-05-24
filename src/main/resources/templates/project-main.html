@@ -12,10 +12,33 @@
 <div th:insert="~{blocks/header}"></div>
 <h3 class="container mt-5">Проекты</h3>
 
-<div th:each="el : ${project}" class="alert alert-info mt-3">
+<div th:each="el : ${projectsPage.content}" class="alert alert-info mt-3">
     <h3 th:text="${el.title}"></h3>
-    <p th:text="${el.direction}"></p>
-    <a th:href="'/project/' + ${el.id}" class="btn btn-warning">детальнее</a>
+    <p><b>Направление:</b> <span th:text="${el.direction}"/> </p>
+    <a th:href="'/project/' + ${el.id}" class="btn btn-primary">детальнее</a>
+</div>
+
+<div>
+
+    <form action="/project/remain" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
+        <button type="submit" class="btn btn-primary mt-3"> Восстановить последний проект</button>
+    </form>
+
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <a th:if="${projectsPage.hasPrevious()}"
+               th:href="@{/project(page=${projectsPage.number - 1}, size=${projectsPage.size})}"
+               class="btn btn-primary">Предыдущая</a>
+        </div>
+        <div class="col-md-6 text-end">
+            <a th:if="${projectsPage.hasNext()}"
+               th:href="@{/project(page=${projectsPage.number + 1}, size=${projectsPage.size})}"
+               class="btn btn-primary">Следующая</a>
+        </div>
+    </div>
+    <p class="mt-3">Страница <span th:text="${projectsPage.number + 1}"></span> из <span th:text="${projectsPage.totalPages}"></span></p>
 </div>
 
 <div th:insert="~{blocks/footer}"></div>

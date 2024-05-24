@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
@@ -31,9 +32,19 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/new-user", "/index", "/").permitAll()
-                        .requestMatchers("/project/**").hasRole("ADMIN"))
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/new-user", "/index", "/", "/new-student").permitAll()
+                       .requestMatchers("/project/**", "/project").permitAll()
+                       .requestMatchers("/lk/**" , "/lk").permitAll()
+                )
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/index", true) // Перенаправление на /index после успешного входа
+                        .permitAll()
+                )
+                .logout(logout ->
+                        logout
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/index")
+                                .permitAll())
                 .build();
     }
 
